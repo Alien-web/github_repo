@@ -1,4 +1,5 @@
 from django.shortcuts import render,redirect
+from django.shortcuts import render
 from django.contrib.auth.models import auth, User
 from django.contrib import messages
 from .models import Booking
@@ -48,12 +49,67 @@ def register(request):
      return render(request,'register.html')
 
 def history(request):
-    return render(request,'history.html')
+    i=0
+    j=0
+    dic=list()
+    book_dests=list()
+    books_id=list()
+    dests2=list()
+    user_id=request.user.id
+    books=Booking.objects.all()
+    dests=Destination.objects.all()
+    users=User.objects.all()
+    for user in users:
+        if user.id==user_id:
+            fname=user.username
+    if Booking.objects.filter(user_id=request.user.id).exists():
+        for book in books:
+            if book.user_id==user_id:
+                books_id.append(book.id)
+                book_dests.append(book.dest_id)
+                for i in range(len(books_id)):
+                    for dest in dests:
+                        if dest.id==book_dests[i]:
+                            if dest.dest_name not in dests2:
+                             dests2.append(dest.dest_name)   
+    else:
+        messages.info(request,"no history available for you with Travello.")
+        return redirect("/")
+    
+    for j in range(len(dests2)):
+        id1=books_id[j]
+        name=dests2[j]
+        dic.append({"id":id1,"name":name}.values())
+    return render(None,'history.html',{"name":fname,'dests':dic})
 
 def admin(request):
-    return render(request,'admin.html')
+    user=User.objects.filter(id=request.user.id)
+    for x in user:
+        user1=x
+    return render(request,'admin.html',{'name':user1})
 
 def logout(request):
     auth.logout(request)
     return redirect("/")
+
+def add(request):
+    return redirect("admin")
+
+def modify(request):
+    return redirect("admin")
+
+def show(request):
+    dic=list()
+    users=User.objects.all()
+    for user in users:
+        dic.append({'id':user.id,'uname':user.username,'fname':user.first_name,'lname':user.last_name,'email':user.email,'passwor':user.password}.values())   
+    return render(request,"show.html",{'users':dic})
+
+def showbook(request):
+    dic=list()
+    users=User.objects.all()
+    
+    for user in users:
+        dic.append({'id':user.id,'uname':user.username,'fname':user.first_name,'lname':user.last_name,'email':user.email,'passwor':user.password}.values())   
+    return render(request,"show.html",{'users':dic})
 

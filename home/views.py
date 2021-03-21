@@ -19,7 +19,6 @@ def destination(request):
 
 def book(request):
     name = request.GET.get('name')
-    # users=User.objects.all()
     dests=Destination.objects.all()
     user_id=request.user.id
     for dest in dests:

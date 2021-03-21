@@ -2,7 +2,27 @@
 {% load static %}
 <!DOCTYPE html>
 <html lang="en">
-
+<style>
+    table{
+        border-collapse: collapse;
+        margin: 25px 0;
+        font-size: 0.9em;
+        font-family: sans-serif;
+        min-width: 400px;
+        box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+    }
+    thead tr {
+        background-color: #0e834c;
+        color: #ffffff;
+        text-align: left;
+    }
+    th,td {
+        padding: 12px 15px;
+    }
+    tbody tr {
+    border-bottom: 1px solid #dddddd;
+}
+</style>
 <head>
     <!-- basic -->
     <meta charset="utf-8">
@@ -11,7 +31,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="viewport" content="initial-scale=1, maximum-scale=1">
     <!-- site metas -->
-    <title>moon firm</title>
+    <title>Travello</title>
     <meta name="keywords" content="">
     <meta name="description" content="">
     <meta name="author" content="">
@@ -70,8 +90,26 @@
             <div class="row">
                 <div class="col-xl-5 col-lg-5 col-md-5 co-sm-l2">
                     <div class="about_box">
-                        <h2>Hai Ramya,<br><strong class="black">Travello history</strong></h2>
-                        This is user history
+                        <h2> {{name}}'s <br><strong class="black">Travello history</strong></h2>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th> Booking Id</th>
+                                    <th> Destination</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {%for dest in dests%}
+                                <tr>
+                                 {%for i in dest%}
+                                 <td>
+                                     {{i}}
+                                 </td> 
+                                 {%endfor%}
+                                </tr>
+                                {% endfor%}
+                            </tbody>
+                        </table>
                     </div>
                 </div>
                 <div class="col-xl-7 col-lg-7 col-md-7 co-sm-l2">
@@ -115,3 +153,4 @@
 </body>
 
 </html>
+

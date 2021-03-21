@@ -10,7 +10,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="viewport" content="initial-scale=1, maximum-scale=1">
     <!-- site metas -->
-    <title>travello</title>
+    <title>Travello</title>
     <meta name="keywords" content="">
     <meta name="description" content="">
     <meta name="author" content="">
@@ -49,22 +49,20 @@
                                         <nav class="main-menu">
                                             <ul class="menu-area-main">
                                                 {% if user.is_authenticated %}
-                                                <li>Hi,  {{user.username}}</li>
+                                                <li>Hi, {{user.username}} <h5 style="color:rgb(254, 254, 255)"><b>
+                                                    {% for message in messages %}
+                                                    {{message}}
+                                                    {% endfor %}
+                                                </h5 ></b></li>
                                                 <li></li>
                                                 <li></li>
                                                 <li></li>
                                                 <li></li>
-                                                <li></li>
-                                                <li></li>
-                                                <li></li>
-                                                <li></li>
-                                                <li></li>
-                                                <li></li>
-                                                <li></li>
-                                                <li></li>
-                                                <li></li>
+                                                <li></li> 
                                                 <li> <a href="accounts/history">History</a> </li>
+                                                  {% if user.is_superuser %}
                                                 <li> <a href="accounts/admin">Admin</a> </li>
+                                                   {% endif %}
                                                 <li class="active"> <a href="accounts/logout">Logout</a> </li>
                                                 {%else%}
                                                 <li> <a href="accounts/register">Register</a> </li>
@@ -73,8 +71,7 @@
                                             </ul>
                                         </nav>
                                     </div>
-                                </div>
-
+                                </div>      
                             </div>
                        </div>
                     </div>
@@ -90,10 +87,8 @@
                 <div class="carousel-item active">
                     <img class="first-slide" src="{% static 'images/rock.jpg' %}" alt="First slide">
                     <div class="container">
-                        <div class="carousel-caption relative">
-                            <h1>Travello</h1>
+                        <div class="carousel-caption relative"><h1>Travello</h1>
                             <span>Travelling Destination</span>
-
                             <p>Lets wander around without being lost..</p>
                         </div>
                     </div>
@@ -148,10 +143,6 @@
                                 <figure><a href="accounts/login"><img src="{{dest.img.url}}" alt="#" /></a>
                                 {% endif%}
                                     <h3>{{dest.dest_name}}<br>Rs.{{dest.price}} </h3></figure>
-                                <h4>{% for message in messages %}
-                                    {{message}}
-                                    {% endfor %}
-                                </h4>
                             </div>
                         </div>
                         {% endfor%}

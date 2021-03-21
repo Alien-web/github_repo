@@ -1,19 +1,30 @@
+
 {% load static %}
 <!DOCTYPE html>
 <html lang="en">
+
     <style>
-        button {
-            display: inline-block;
-            background-color: #0e834c;
-            border-radius: 50px;
-            border: 10px double #cccccc;
-            color: #ffffff;
-            text-align: center;
-            font-size: 30px;
-            padding: 50px;
-            width: 250px;
+        table{
+            border-collapse: collapse;
+            margin: 25px 0;
+            font-size: 0.9em;
+            font-family: sans-serif;
+            min-width: 400px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
         }
-    </style>
+        thead tr {
+            background-color: #0e834c;
+            color: #ffffff;
+            text-align: left;
+        }
+        th,td {
+            padding: 12px 15px;
+        }
+        tbody tr {
+        border-bottom: 1px solid #dddddd;
+    }
+</style>
+
 <head>
     <!-- basic -->
     <meta charset="utf-8">
@@ -60,7 +71,7 @@
                                     <div class="limit-box">
                                         <nav class="main-menu">
                                             <ul class="menu-area-main">
-                                                <li> <a href="/">Home</a> </li>
+                                                <li class="active"> <a href="admin">Back</a> </li>
                                             </ul>
                                         </nav>
                                     </div>
@@ -81,13 +92,34 @@
             <div class="row">
                 <div class="col-xl-5 col-lg-5 col-md-5 co-sm-l2">
                     <div class="about_box">
-                        <h2>{{name}}<br><strong class="black"> Travello Destination</strong></h2>
-                        <p>{{desc}}<br><br><b>Price: {{price}}<button type="submit" onclick="location.href='book?name={{name|urlencode}}'">Book {{name}}</button></b></p>
-                    </div>
-                </div>
-                <div class="col-xl-7 col-lg-7 col-md-7 co-sm-l2">
-                    <div class="about_img">
-                        <figure><img src="{{image}}" alt="img" /></figure>
+                        <h4>{% for message in messages %}
+                            {{message}}
+                            {% endfor %}
+                        </h4>
+                        <h2>Show users<br><strong class="black"> Travello</strong></h2>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th> User Id</th>
+                                    <th> Username</th>
+                                    <th> First Name</th>
+                                    <th> Last name</th>
+                                    <th> Email</th>
+                                    <th> Password</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {%for user in users%}
+                                <tr>
+                                 {%for i in user%}
+                                 <td>
+                                     {{i}}
+                                 </td> 
+                                 {%endfor%}
+                                </tr>
+                                {% endfor%}
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </div>
